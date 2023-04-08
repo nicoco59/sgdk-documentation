@@ -1,3 +1,5 @@
+// This template initializes SGDK, clears the screen, and prints "Hello World!" at coordinates (10, 10) on the screen. You can add your game logic inside the while loop. Note that this is just a basic template, and you'll need to add more code to make a complete game.
+
 #include <genesis.h>
 
 int main()
