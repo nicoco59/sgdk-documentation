@@ -1,0 +1,51 @@
+// In this example, we have two external graphics files called background1_gfx.h and background2_gfx.h that contain the background tiles, tilemaps, and palettes. We load the background tiles into VRAM using VDP_loadTileSet() and set the palettes using VDP_setPalette().
+
+// We then create two background plans using VDP_setPlaneSize(), and set up each background using VDP_setTileMapDataRect() and VDP_setScrolling() to specify the tilemap and scrolling values. Note that we set the scrolling mode to HSCROLL_PLANE and VSCROLL_PLANE to enable parallax scrolling.
+
+// In the game loop, we update the horizontal scroll for both backgrounds using VDP_setHorizontalScroll(), and then wait for VBlank using VDP_waitVSync() before rendering the frame. This ensures that the screen is updated at the correct time.
+
+// Note that in order to use this code, you'll need to create two background tilemap files and include them in your project using the SGDK graphics tool.
+
+#include <genesis.h>
+#include "gfx.h" // Include the graphics header file
+
+int main()
+{
+    // Initialize SGDK
+    VDP_init();
+    
+    // Load the background tiles
+    VDP_loadTileSet(background1_gfx.tileset, 1, DMA);
+    VDP_loadTileSet(background2_gfx.tileset, 2, DMA);
+    
+    // Set the palette
+    VDP_setPalette(PAL1, background1_gfx.palette->data);
+    VDP_setPalette(PAL2, background2_gfx.palette->data);
+    
+    // Create the background plans
+    VDP_setScrollingMode(HSCROLL_PLANE, VSCROLL_PLANE);
+    VDP_setPlaneSize(BG_A, PLAN_SIZE_256x256);
+    VDP_setPlaneSize(BG_B, PLAN_SIZE_256x256);
+    
+    // Set up the first background
+    VDP_setTileMapDataRect(BG_A, background1_gfx.tilemap->data, 0, 0, background1_gfx.tilemap->w, background1_gfx.tilemap->h);
+    VDP_setHorizontalScroll(BG_A, 0, 0);
+    VDP_setVerticalScroll(BG_A, 0, 0);
+    
+    // Set up the second background
+    VDP_setTileMapDataRect(BG_B, background2_gfx.tilemap->data, 0, 0, background2_gfx.tilemap->w, background2_gfx.tilemap->h);
+    VDP_setHorizontalScroll(BG_B, 0, 0);
+    VDP_setVerticalScroll(BG_B, 0, 0);
+    
+    while(1)
+    {
+        // Update the horizontal scroll for both backgrounds
+        VDP_setHorizontalScroll(BG_A, 0, VDP_getHorizontalScroll(BG_A) + 1);
+        VDP_setHorizontalScroll(BG_B, 0, VDP_getHorizontalScroll(BG_B) + 2);
+        
+        // Wait for VBlank before rendering the frame
+        VDP_waitVSync();
+    }
+    
+    return 0;
+}
