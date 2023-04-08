@@ -1,0 +1,46 @@
+/* In SGDK, the camera can be handled by adjusting the position of the background and foreground layers in your game. Here's a basic approach to handling the camera in SGDK:
+Set up your background and foreground layers:
+Before you can adjust the camera, you need to set up your game's background and foreground layers. These layers should contain the graphics that make up the environment in which your game takes place.
+To set up a background layer, you can use the VDP_setTileMapXY() function to load a tile map and set its position. For example: */
+
+VDP_setTileMapXY(BG_A, TILE_ATTR_FULL(PAL0, FALSE, FALSE, FALSE, TILE_USERINDEX), 0, 0);
+
+// To set up a foreground layer, you can use the VDP_setWindow() function to define a window of tiles that will be displayed on top of the background layer. For example:
+
+VDP_setWindow(HSCROLL_A, WINDOW_SIZE(2, 1));
+
+/* Update the camera position:
+
+To update the camera position, you need to adjust the position of the background and foreground layers based on the position of the player or other game elements. You can do this by using the VDP_setHorizontalScroll() function to set the horizontal position of each layer.
+
+For example, to center the camera on a player sprite, you can calculate the player's X position relative to the screen center and use that value to set the horizontal scroll position of each layer. Here's an example: */
+
+int playerX = player.posx;
+int cameraX = playerX - SCREEN_WIDTH / 2;
+
+// Set the background layer scroll position
+VDP_setHorizontalScroll(BG_A, cameraX);
+
+// Set the foreground layer scroll position
+VDP_setHorizontalScroll(HSCROLL_A, cameraX);
+
+/* In this example, player.posx is the X position of the player sprite, and SCREEN_WIDTH is the width of the screen. Update the camera position in your game loop: To update the camera position in your game loop, you can call the camera update function at the beginning of each frame. For example: */
+
+while (TRUE) {
+    // Update the camera position
+    updateCameraPosition();
+
+    // Update game logic
+    updateGameLogic();
+
+    // Update sprite positions
+    updateSpritePositions();
+
+    // Draw the screen
+    VDP_waitVSync();
+    VDP_drawText("Hello World!", 10, 10);
+    VDP_updateSprites(1, TRUE);
+    VDP_updateTileMap(BG_A);
+}
+
+/* In this example, updateCameraPosition() is the function that updates the camera position, and the other functions update the game logic and draw the screen. Note that this is just a basic example of how to handle the camera in SGDK. Depending on your game's needs, you may need to use more advanced camera techniques, such as implementing parallax scrolling or adding camera shake effects. */
