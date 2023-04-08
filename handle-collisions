@@ -1,0 +1,51 @@
+// Create a collision detection function: First, you need to create a function that will detect collisions between sprites. This function should take in two sprite structures and return a boolean value indicating whether the sprites are colliding. The function should use the position and size of each sprite to determine if they overlap.
+// Here's an example of a simple collision detection function:
+
+bool checkCollision(Sprite* sprite1, Sprite* sprite2) {
+    return ((sprite1->posx + sprite1->width > sprite2->posx) &&
+            (sprite1->posy + sprite1->height > sprite2->posy) &&
+            (sprite1->posx < sprite2->posx + sprite2->width) &&
+            (sprite1->posy < sprite2->posy + sprite2->height));
+}
+
+// Loop through each sprite and check for collisions
+for (int i = 0; i < MAX_SPRITES; i++) {
+    for (int j = i + 1; j < MAX_SPRITES; j++) {
+        // Check for collision between sprites i and j
+        if (checkCollision(&sprites[i], &sprites[j])) {
+            // Handle collision here
+        }
+    }
+}
+
+// Check for collisions in your game loop:
+// In your main game loop, you need to check for collisions between your sprites. Loop through each sprite and compare it to all other sprites to see if they are colliding. When a collision is detected, you can perform some action, such as removing one or both sprites, updating a score, or triggering an animation. Here's an example of how to check for collisions in your game loop:
+
+// Loop through each sprite and check for collisions
+for (int i = 0; i < MAX_SPRITES; i++) {
+    for (int j = i + 1; j < MAX_SPRITES; j++) {
+        // Check for collision between sprites i and j
+        if (checkCollision(&sprites[i], &sprites[j])) {
+            // Handle collision here
+        }
+    }
+}
+
+// In this example, MAX_SPRITES is the maximum number of sprites in your game, and sprites is an array of Sprite structures that contain the position and size of each sprite.
+
+// Update your sprite positions:
+// When your sprites collide, you may need to update their positions to prevent them from overlapping. One approach is to move the sprites back to their previous positions before the collision occurred. You can do this by storing the previous position of each sprite and updating it when a collision occurs.
+// Here's an example of how to update the positions of colliding sprites:
+
+if (checkCollision(&sprite1, &sprite2)) {
+    // Move sprite1 back to its previous position
+    sprite1.posx = sprite1.prevPosx;
+    sprite1.posy = sprite1.prevPosy;
+
+    // Move sprite2 back to its previous position
+    sprite2.posx = sprite2.prevPosx;
+    sprite2.posy = sprite2.prevPosy;
+}
+
+// In this example, prevPosx and prevPosy are variables that store the previous position of each sprite.
+// Note that this is just a basic example of how to handle sprite-to-sprite collisions in SGDK. Depending on your game's needs, you may need to use more advanced collision detection techniques, such as using collision masks or implementing physics-based collision response.
