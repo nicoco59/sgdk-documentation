@@ -1,0 +1,33 @@
+#include <genesis.h>
+#include "gfx.h" // Include the graphics header file
+
+int main()
+{
+    // Initialize SGDK
+    VDP_init();
+    
+    // Load the image
+    VDP_loadTileSet(gfx, 1, DMA);
+    
+    // Set the palette
+    VDP_setPalette(PAL1, gfx.palette->data);
+    
+    // Clear the screen
+    VDP_clearPlan(PLAN_A, TRUE);
+    
+    // Draw the image
+    VDP_drawImageEx(PLAN_A, &gfx, TILE_ATTR_FULL(PAL1, 0, 0, 0, 1), 0, 0, FALSE, DMA);
+    
+    while(1)
+    {
+        // Your game loop code goes here
+    }
+    
+    return 0;
+}
+
+In this example, we have an external graphics file called gfx.h that contains the image data and palette. We load the image data into VRAM using VDP_loadTileSet(), set the palette using VDP_setPalette(), and then draw the image using VDP_drawImageEx().
+
+VDP_drawImageEx() takes several arguments, including the plan to draw the image to, a pointer to the Image structure, the tile attribute, and the x and y coordinates. The TILE_ATTR_FULL() macro is used to specify the tile attribute for the image.
+
+Note that in order to use this code, you'll need to create a graphics file and include it in your project using the SGDK graphics tool.
