@@ -1,0 +1,21 @@
+/* To make a small map with SGDK, you can create a simple tile-based map using a small number of tiles and a small map size. Here's an example of how to create a 4x4 map using a 16x16 pixel tileset: Create a 16x16 pixel tileset image and save it in a format that SGDK can load, such as a .png file. Use a tile editor tool (such as Tiled or Tilesetter) to create a 4x4 map using your tileset. Save the map data in a format that SGDK can read, such as a .csv file. Load your tileset image and map data into VRAM using VDP_loadTileSet() and VDP_setTileMapData(), respectively. */
+
+// Load the tileset image
+u32 tileset = TILE_USERINDEX;
+VDP_loadTileSet("tileset.png", tileset, DMA);
+
+// Define the map data
+u16 map[4][4] = {
+    {0, 0, 0, 0},
+    {0, 1, 1, 0},
+    {0, 1, 1, 0},
+    {0, 0, 0, 0}
+};
+
+// Load the map data
+VDP_setTileMapData(map, 0, 0, 4, 4);
+
+/* Display your map on the screen using VDP_setMap(). */
+
+// Display the map on screen
+VDP_setMap(map, tileset, TILE_ATTR_FULL(PAL0, 0, 0, 0, TILE_USERINDEX), 0, 0);
