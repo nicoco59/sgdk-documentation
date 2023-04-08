@@ -1,7 +1,4 @@
-// In this example, we have an external graphics file called gfx.h that contains the sprite sheet data and palette. We load the sprite sheet data into VRAM using VDP_loadTileSet(), set the palette using VDP_setPalette(), and then add the sprite to the sprite engine using SPR_addSprite().
-// We also set up the sprite's animation using SPR_setAnim(). This function takes two arguments: the sprite to animate and the index of the starting animation.
-// In the game loop, we update the sprite's animation using SPR_update(), and then wait for VBlank using VDP_waitVSync() before rendering the frame. This ensures that the screen is updated at the correct time.
-// Note that in order to use this code, you'll need to create a sprite sheet file and include it in your project using the SGDK graphics tool.
+/* In this example, we have an external graphics file called gfx.h that contains the sprite sheet data and palette. We load the sprite sheet data into VRAM using VDP_loadTileSet(), set the palette using VDP_setPalette(), and then add the sprite to the sprite engine using SPR_addSprite(). We also set up the sprite's animation using SPR_setAnim(). This function takes two arguments: the sprite to animate and the index of the starting animation. In the game loop, we update the sprite's animation using SPR_update(), and then wait for VBlank using VDP_waitVSync() before rendering the frame. This ensures that the screen is updated at the correct time. Note that in order to use this code, you'll need to create a sprite sheet file and include it in your project using the SGDK graphics tool. */
 
 #include <genesis.h>
 #include "gfx.h" // Include the graphics header file
