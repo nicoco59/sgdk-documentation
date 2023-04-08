@@ -1,3 +1,5 @@
+// This code initializes SGDK, sets the font and palette, clears the screen, and prints "Hello World!" at coordinates (10, 10) on the screen. You can customize the font and palette by changing the values passed to VDP_setTextPalette(). The VDP_drawText() function takes three arguments: the text to print, the x coordinate, and the y coordinate.
+
 #include <genesis.h>
 
 int main()
