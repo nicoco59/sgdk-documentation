@@ -1,0 +1,46 @@
+// In this example, we define a sprite called my_sprite. The name attribute is optional and just provides a descriptive name for the sprite. We also define a palette called my_sprite_palette, a tileset called my_sprite_tileset, and a frames section called my_sprite_frames.
+
+// In the my_sprite_palette section, we define the colors used by the sprite. In this example, we define 16 colors, including a transparent color.
+
+// In the my_sprite_tileset section, we define the image file that contains the sprite graphics, and link it to the my_sprite_palette we defined earlier. We also specify the tile size, which in this case is 32x32 pixels.
+
+// In the my_sprite_frames section, we define each frame of the sprite animation. In this example, we define three frames, each with the same settings (all zeros). You'll need to update the x and y positions and any other attributes as needed for your specific sprite.
+
+// Once you have defined your sprite in the res file, you can load it in your SGDK project using the VDP_loadTileSet() function, and add it to the sprite engine using SPR_addSprite().
+
+// Note that you'll also need to include the sprite's palette and tileset in your project using the SGDK graphics tool.
+
+SPRITE my_sprite
+{
+    name "My Sprite"
+    palette my_sprite_palette
+    tileset my_sprite_tileset
+    frames my_sprite_frames
+}
+
+PALETTE my_sprite_palette
+{
+    colors 16
+    {
+        0, RGB24_TO_VDPCOLOR(0x000000), // Transparent
+        1, RGB24_TO_VDPCOLOR(0xFF0000),
+        2, RGB24_TO_VDPCOLOR(0x00FF00),
+        3, RGB24_TO_VDPCOLOR(0x0000FF),
+        // Add more colors here as needed
+    }
+}
+
+TILESET my_sprite_tileset
+{
+    image "my_sprite.png"
+    palette my_sprite_palette
+    tilesize 32, 32
+}
+
+FRAMES my_sprite_frames
+{
+    frame 0, 0, 0, 0, 0, 0, 0
+    frame 1, 0, 0, 0, 0, 0, 0
+    frame 2, 0, 0, 0, 0, 0, 0
+    // Add more frames here as needed
+}
