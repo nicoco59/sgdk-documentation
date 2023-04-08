@@ -1,0 +1,46 @@
+/* In this example, we define a 2D array maze that represents the maze, where 0 represents a path and 1 represents a wall. We also define constants MAZE_WIDTH and MAZE_HEIGHT to make it easier to modify the size of the maze.
+
+The drawMaze() function iterates over the maze array and draws a wall wherever the value is 1, using the VDP_drawText() function to draw an "X" character at the corresponding position.
+
+In the main() function, we initialize the VDP and set the text palette to PAL1, which is a predefined color palette in SGDK. We also set the background color to black by setting the color of palette index 15 to black.
+
+Finally, we call drawMaze() to draw the maze on the screen, and then start the game loop (which is empty in this example). */
+
+#include <genesis.h>
+
+#define MAZE_WIDTH 8
+#define MAZE_HEIGHT 8
+
+u16 maze[MAZE_HEIGHT][MAZE_WIDTH] = {
+    {1, 1, 1, 1, 1, 1, 1, 1},
+    {1, 0, 0, 0, 0, 0, 0, 1},
+    {1, 0, 1, 1, 1, 1, 0, 1},
+    {1, 0, 0, 0, 0, 1, 0, 1},
+    {1, 1, 1, 1, 0, 1, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 1},
+    {1, 0, 1, 1, 1, 1, 0, 1},
+    {1, 1, 1, 1, 1, 1, 1, 1}
+};
+
+void drawMaze() {
+    int x, y;
+    for (y = 0; y < MAZE_HEIGHT; y++) {
+        for (x = 0; x < MAZE_WIDTH; x++) {
+            if (maze[y][x] == 1) {
+                VDP_drawText("X", x, y);
+            }
+        }
+    }
+}
+
+void main() {
+    VDP_init();
+    VDP_setTextPalette(PAL1);
+    VDP_setPaletteColor(15, RGB24_TO_VDPCOLOR(0x000000)); // set background color to black
+    
+    drawMaze();
+    
+    while(1) {
+        // game loop goes here
+    }
+}
